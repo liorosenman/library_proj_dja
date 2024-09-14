@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from base.models import Customer
-from base.serializers import CustomerSerializer
-from rest_framework import viewsets
-from .models import User
+from base.models import Customer, Book
+from base.serializers import BookSerializer, CustomerSerializer
+from .models import User, Customer, Book
 from rest_framework.decorators import api_view
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import logout
+
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
@@ -30,7 +30,17 @@ class CustomerViewSet(viewsets.ModelViewSet):
                 customer = Customer.objects.create(user=user,name=name,city=city,age=age)
                 customer.save()
                 return Response({"message": "Customer registered successfully."}, status=status.HTTP_201_CREATED)
-    
+
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+    def create(self, request):
+        if not request.user.is_superuser:
+            return Response({"error": "You do not have permission to create a new book."},
+                status=status.HTTP_403_FORBIDDEN)
+        return super().create(request)
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
