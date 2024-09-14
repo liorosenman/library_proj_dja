@@ -7,6 +7,9 @@ from rest_framework.decorators import api_view
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth import logout
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
@@ -27,6 +30,24 @@ class CustomerViewSet(viewsets.ModelViewSet):
                 customer = Customer.objects.create(user=user,name=name,city=city,age=age)
                 customer.save()
                 return Response({"message": "Customer registered successfully."}, status=status.HTTP_201_CREATED)
+    
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['username'] = user.username
+        token['id'] = user.id
+        token['is_superuser'] = user.is_superuser
+        return token
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+@api_view(['POST'])
+def logout_user(request):
+    logout(request)
+    return Response({"message": "User logged out successfully."}, status=status.HTTP_200_OK)
             
 
 
