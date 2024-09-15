@@ -36,6 +36,7 @@ class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
 
     def create(self, request):
+        # return Response({"is_admin" : request.user.username})
         if not request.user.is_superuser:
             return Response({"error": "You do not have permission to create a new book."},
                 status=status.HTTP_403_FORBIDDEN)
