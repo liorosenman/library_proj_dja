@@ -9,8 +9,8 @@ export class LoginsrvService {
 SERVER = "http://127.0.0.1:8000/login/"
 constructor(private http : HttpClient) { }
 
-Login(): Observable<any>{
-  return this.http.post<any>(this.SERVER)
+login(data: { username: string; password: string }): Observable<any> {
+  return this.http.post<any>(this.SERVER, data);
   }
 }
 
