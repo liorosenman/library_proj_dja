@@ -1,13 +1,13 @@
 <div>
     <h2>Login Form</h2>
-    <form>
+    <form [formGroup]="myForm" (ngSubmit)="loginSubmit() ">
         <div>
             <label>Username:</label>
-            <input id="username" type="text" [(ngModel)]="userInput" />
+            <input type="text" [(ngModel)]="userInput" formControlName="username" />
         </div>
         <div>
             <label>Password:</label>
-            <input id="password" type="text" [(ngModel)]="passInput">
+            <input type="text" [(ngModel)]="passInput" formControlName="password"/>
         </div>
         <br><br>
         <button (click)="loginSubmit()">SUBMIT</button>
