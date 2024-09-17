@@ -16,7 +16,8 @@ urlpatterns = [
     path('', include(router.urls)),
     path('login/', TokenObtainPairView.as_view()),
     path('logout_user/', views.logout_user, name='logout'),
-    # path('create_book/', views.create)
+    # path('register/', views.register)
+    
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

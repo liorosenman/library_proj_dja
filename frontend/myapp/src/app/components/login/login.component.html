@@ -1,16 +1,16 @@
 <div>
     <h2>Login Form</h2>
-    <form [formGroup]="myForm" (ngSubmit)="loginSubmit() ">
+    <form [formGroup]="myForm" (ngSubmit)="loginSubmit()">
         <div>
             <label>Username:</label>
-            <input type="text" [(ngModel)]="userInput" formControlName="username" />
+            <input type="text"  formControlName="username" />
         </div>
         <div>
             <label>Password:</label>
-            <input type="text" [(ngModel)]="passInput" formControlName="password"/>
+            <input type="password"  formControlName="password"/>
         </div>
         <br><br>
-        <button (click)="loginSubmit()">SUBMIT</button>
-        <h3 [(ngModel)]="msg"></h3>
+        <button type="submit">SUBMIT</button>
+        <h3>{{ msg }}</h3>
     </form>
 </div>

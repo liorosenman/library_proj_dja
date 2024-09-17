@@ -10,25 +10,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   myForm: FormGroup;
-  userInput: string = '';
-  passInput: string = '';
   msg: string = '';
 
-  constructor(private fb: FormBuilder, private loginsrvService: LoginsrvService) {
+  constructor(private fb: FormBuilder, private loginSrv: LoginsrvService) {
     this.myForm = this.fb.group({
-      userInput: ['', Validators.required],
-      passInput: ['', Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
   loginSubmit() {
     if (this.myForm.valid) {
-      const credentials = this.myForm.value;
-      this.loginsrvService.login(credentials).subscribe({
-        next: (msg) => {
+      const credentials = {
+        username: this.myForm.get('username')?.value,
+        password: this.myForm.get('password')?.value,
+      };
+
+      this.loginSrv.login(credentials).subscribe({
+        next: (msg:string) => {
           this.msg = 'Login successful!';
         },
-        error: (err) => {
+        error: (err:string) => {
           this.msg = 'Login failed. Please try again.';
           console.error(err);
         }

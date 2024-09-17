@@ -1,0 +1,29 @@
+<div>
+    <h2>Register Form</h2>
+    <form [formGroup]="myForm" (ngSubmit)="addUser()">
+        <div>
+            <label>Username:</label>
+            <input type="text" formControlName="username" />
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" formControlName="password" />
+        </div>
+        <div>
+            <label>Name:</label>
+            <input type="text" formControlName="name" />
+        </div>
+        <div>
+            <label>City:</label>
+            <input type="text" formControlName="city" />
+        </div>
+        <div>
+            <label>Age:</label>
+            <input type="number" formControlName="age" />
+        </div>
+        <br><br>
+        <button type="submit">SUBMIT</button>
+        <h3>{{ msg }}</h3>
+    </form>
+</div>
+
