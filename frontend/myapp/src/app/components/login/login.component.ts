@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginsrvService } from '../../services/loginsrv.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent {
   myForm: FormGroup;
   msg: string = '';
 
-  constructor(private fb: FormBuilder, private loginSrv: LoginsrvService) {
+  constructor(private fb: FormBuilder, private loginSrv: LoginsrvService, private router:Router) {
     this.myForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -27,8 +27,11 @@ export class LoginComponent {
       };
 
       this.loginSrv.login(credentials).subscribe({
-        next: (msg:string) => {
-          this.msg = 'Login successful!';
+        next: (response: any) => {
+          const token = response.token;
+          localStorage.setItem('authToken', token);
+          this.router.navigate(['/books']);
+
         },
         error: (err:string) => {
           this.msg = 'Login failed. Please try again.';

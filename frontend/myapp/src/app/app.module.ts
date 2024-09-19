@@ -7,12 +7,20 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
+import { BooksComponent } from './components/books/books.component';
+import { UsersComponent } from './components/users/users.component';
+import { LoansComponent } from './components/loans/loans.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BooksComponent,
+    UsersComponent,
+    LoansComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
