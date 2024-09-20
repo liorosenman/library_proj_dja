@@ -11,6 +11,7 @@ import { BooksComponent } from './components/books/books.component';
 import { UsersComponent } from './components/users/users.component';
 import { LoansComponent } from './components/loans/loans.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [

@@ -28,10 +28,12 @@ export class LoginComponent {
 
       this.loginSrv.login(credentials).subscribe({
         next: (response: any) => {
-          const token = response.token;
+          console.log("AAAAAAAAAAAAAAAAA");
+          const token = response.access;
+          console.log(token);
           localStorage.setItem('authToken', token);
           this.router.navigate(['/books']);
-
+          console.log("Abbbbbbbbbbbbbb");
         },
         error: (err:string) => {
           this.msg = 'Login failed. Please try again.';

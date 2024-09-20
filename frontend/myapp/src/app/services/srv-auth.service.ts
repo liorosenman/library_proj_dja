@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,9 @@ export class SrvAuthService {
     const token = this.getToken();
     if (token) {
       try {
-        return jwt_decode(token);  // Decode the token
+        const decoded = jwtDecode(token);
+        return decoded;
+        // return jwt_decode(token);
       } catch (error) {
         console.error('Invalid token', error);
         return null;

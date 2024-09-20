@@ -11,8 +11,10 @@ SERVER = "http://127.0.0.1:8000/login/"
 constructor(private http : HttpClient) { }
 
 login(credentials: { username: string; password: string }): Observable<any> {
-  return this.http.post<any>(this.SERVER, credentials);
+  const headers = { 'Content-Type': 'application/json' };
+  return this.http.post<any>(this.SERVER, credentials, { headers });
   }
+
 }
 
 

@@ -5,7 +5,7 @@ import { UsersComponent } from './components/users/users.component';
 import { BooksComponent } from './components/books/books.component';
 import { LoansComponent } from './components/loans/loans.component';
 
-const token = localStorage.getItem('authToken');
+// const token = localStorage.getItem('authToken');
 
 
 const routes: Routes = [
